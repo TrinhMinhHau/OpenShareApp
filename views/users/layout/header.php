@@ -153,11 +153,12 @@
             <div class="settings-notice" style="overflow: scroll; ">
                 <div class="settings-notice-inner">
                     <?php
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
                     function convert_time($datecreate)
                     {
 
                         $thoigianhienthi = 0;
-                        $thoigian = ((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600) + 5;
+                        $thoigian = ((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600);
                         if ($thoigian <= 1) {
                             $thoigianhienthi = round($thoigian * 60, 0);
                         } else if ($thoigian <= 24) {

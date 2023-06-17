@@ -83,6 +83,7 @@
     </nav>
     <?php
     if (isset($_GET['reresetpassword'])) {
+
         $tendangnhap = $_GET['reuserName'];
         $email = $_GET['reemail'];
         // Dữ liệu của câu hỏi cần cập nhật
@@ -95,7 +96,7 @@
         $json_data = json_encode($data);
 
         // URL của API
-        $url = getUrlHead() . 'controllers/users/auth/sendOtp.php';
+        $url = getUrlHead() . 'users/auth/sendOtp.php';
 
         // Khởi tạo một session cURL
         $curl = curl_init($url);
