@@ -88,7 +88,7 @@ if (isset($_SESSION['token'])) {
     <?php else : ?>
         <?php
 
-        $limit = 10; // Số lượng bài viết muốn hiển thị trên mỗi trang
+        $limit = 5; // Số lượng bài viết muốn hiển thị trên mỗi trang
         $page = isset($_GET['page']) ? $_GET['page'] : 1; // Trang hiện tại, mặc định là trang 1
         $offset = ($page - 1) * $limit; // Vị trí bắt đầu của kết quả cần lấy
 
@@ -444,7 +444,7 @@ if (isset($_SESSION['token'])) {
 
         </div>
         <!-- right-sidebar -->
-        <div class="right-sidebar">
+        <div class="right-sidebar" style="width: 25%;">
             <div class="sidebar-title">
                 <h4 class="text-warning">Quảng cáo</h4>
             </div>

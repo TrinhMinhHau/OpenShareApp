@@ -49,7 +49,7 @@
     <?php
 
     $token = $_SESSION['token'];
-    $limit = 10; // Số lượng bài viết muốn hiển thị trên mỗi trang
+    $limit = 5; // Số lượng bài viết muốn hiển thị trên mỗi trang
     $page = isset($_GET['page']) ? $_GET['page'] : 1; // Trang hiện tại, mặc định là trang 1
     $offset = ($page - 1) * $limit; // Vị trí bắt đầu của kết quả cần lấy
 

@@ -1,5 +1,5 @@
 <div class="post">
-    <i class="fa-regular fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#post"></i>
+    <i class="fa-regular fa-pen-to-square dangbai" data-bs-toggle="modal" data-bs-target="#post"></i>
 
     <div class="modal fade" id="post" tabindex="-1" aria-labelledby="Label_Edit" aria-hidden="true">
         <div class="modal-dialog modal-lg ">

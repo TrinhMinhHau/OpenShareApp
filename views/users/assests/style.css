@@ -659,11 +659,18 @@ a.active1 i {
   font-size: 20px;
   position: fixed;
   bottom: 86px;
-  right: 30px;
+  right: 20px;
   z-index: 10000;
   cursor: pointer;
 }
-
+.post .dangbai {
+  background-color: #ffa925;
+  color: #ffffff;
+  font-size: 24px;
+  border: 2px solid #ffa925;
+  border-radius: 50%;
+  padding: 8px;
+}
 /* CSS sidebar*/
 .shortcut-links {
   /* background-color: #f9f9f9; */
