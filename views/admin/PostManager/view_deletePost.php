@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php'); ?>
+
 <?php
 session_start();
 $token = $_SESSION['token_admin'];
@@ -19,7 +21,7 @@ if (isset($_POST['deletePost'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/admin/PostManager/deletePost.php';
+    $url = getUrlHead() . 'admin/PostManager/deletePost.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);
@@ -42,7 +44,6 @@ if (isset($_POST['deletePost'])) {
         echo 'Có lỗi xảy ra khi gửi yêu cầu PUT đến API';
     } else {
         $response = json_decode($result, true);
-        var_dump($response);
         if ($response[1] === 'Post is Deleted') {
             $_SESSION['status_delete'] = "Xóa bài viết thành công";
             header('location: ./view_displayPost.php');

@@ -12,7 +12,7 @@ $data = array(
 );
 $json_data = json_encode($data);
 
-$url = 'http://localhost:8000/website_openshare/controllers/users/post/manegerRequest.php';
+$url = getUrlHead() . 'users/post/manegerRequest.php';
 
 
 // Khởi tạo một cURL session
@@ -70,7 +70,7 @@ curl_close($curl);
                 );
                 $json_data = json_encode($data);
 
-                $url = 'http://localhost:8000/website_openshare/controllers/users/post/displaynumberItemGiveSuccess.php';
+                $url = getUrlHead() . 'users/post/displaynumberItemGiveSuccess.php';
 
 
                 // Khởi tạo một cURL session
@@ -126,7 +126,7 @@ curl_close($curl);
         $currentIdPost = null;
         $dem = 0;
         for ($i = 0; $i < count($data1); $i++) { ?>
-            <?php if ($data1[$i]['status'] === 3) : ?>
+            <?php if ($data1[$i]['status'] == 3) : ?>
                 <?php $dem++; ?>
                 <?php if ($data1[$i]['idPost'] !== $currentIdPost) : ?>
                     <div class="post-container">
@@ -247,7 +247,7 @@ curl_close($curl);
                         $("#post-image<?php echo $i ?>").imagesGrid({
                             images: <?= json_encode($arr_img) ?>,
                             align: false,
-                            cells: 4,
+                            cells: 2,
                             nextOnClick: true,
                             showViewAll: "more",
                             getViewAllText: function() {},

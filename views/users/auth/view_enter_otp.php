@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,7 +95,7 @@
         $json_data = json_encode($data);
 
         // URL của API
-        $url = 'http://localhost:8000/website_openshare/controllers/users/auth/sendOtp.php';
+        $url = getUrlHead() . 'controllers/users/auth/sendOtp.php';
 
         // Khởi tạo một session cURL
         $curl = curl_init($url);

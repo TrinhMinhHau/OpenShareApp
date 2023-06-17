@@ -4,7 +4,7 @@
 <?php
 
 $token = $_SESSION['token_admin'];
-$url = 'http://localhost:8000/website_openshare/controllers/admin/Statistical/Typefrompost.php';
+$url = getUrlHead() . 'admin/Statistical/Typefrompost.php';
 
 // Khởi tạo một cURL session
 $curl = curl_init();
@@ -31,8 +31,6 @@ if (curl_error($curl)) {
     $data = json_decode($response, true);
     $data1 = (isset($data['data'])) ? $data['data'] : null;
 }
-var_dump($data1);
-var_dump($data1[0]['nameType']);
 $arr_nameType = [];
 $arr_count = [];
 for ($i = 0; $i < count($data1); $i++) {

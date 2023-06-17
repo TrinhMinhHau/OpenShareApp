@@ -1,3 +1,4 @@
+<?php include('../../../configs/url_api.php'); ?>
 
 <?php
 
@@ -10,7 +11,7 @@ session_start();
 $token = $_SESSION['token_admin'];
 
 
-$url = 'http://localhost:8000/website_openshare/controllers/admin/Statistical/Typefrompost.php';
+$url = getUrlHead() . 'admin/Statistical/Typefrompost.php';
 
 // Khởi tạo một cURL session
 $curl = curl_init();

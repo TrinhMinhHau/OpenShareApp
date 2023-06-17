@@ -1,5 +1,4 @@
 <?php include('../layout/header.php'); ?>
-
 <!-- Thư viện jQuery -->
 <script src="//code.jquery.com/jquery.min.js"></script>
 <!-- CSS của Images Grid -->
@@ -15,7 +14,7 @@
     $keyword = isset($_GET['keyword']) ? str_replace(' ', '_', $_GET['keyword']) : '';
 
 
-    $url = 'http://localhost:8000/website_openshare/controllers/users/post/search_page.php?keyword=' . $keyword . '&offset=' . $offset . '&limit=' . $limit;
+    $url = getUrlHead() . 'users/post/search_page.php?keyword=' . $keyword . '&offset=' . $offset . '&limit=' . $limit;
 
     // Khởi tạo một cURL session
     $curl = curl_init();
@@ -50,12 +49,12 @@
     <?php
 
     $token = $_SESSION['token'];
-    $limit = 5; // Số lượng bài viết muốn hiển thị trên mỗi trang
+    $limit = 10; // Số lượng bài viết muốn hiển thị trên mỗi trang
     $page = isset($_GET['page']) ? $_GET['page'] : 1; // Trang hiện tại, mặc định là trang 1
     $offset = ($page - 1) * $limit; // Vị trí bắt đầu của kết quả cần lấy
 
 
-    $url = 'http://localhost:8000/website_openshare/controllers/users/post/getpostapi.php?offset=' . $offset . '&limit=' . $limit;
+    $url = getUrlHead() . 'users/post/getpostapi.php?offset=' . $offset . '&limit=' . $limit;
 
     // Khởi tạo một cURL session
     $curl = curl_init();
@@ -87,6 +86,43 @@
     curl_close($curl);
     ?>
 <?php endif; ?>
+<?php
+
+$token = $_SESSION['token'];
+$keyword = isset($_GET['keyword']) ? str_replace(' ', '_', $_GET['keyword']) : '';
+$url = getUrlHead() . 'users/post/search.php?keyword=' . $keyword;
+
+// Khởi tạo một cURL session
+$curl = curl_init();
+
+// Thiết lập các tùy chọn cho cURL session
+curl_setopt_array($curl, array(
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+        "Accept: application/json",
+        "Authorization: Bearer {$token}",
+    )
+));
+
+// Thực hiện yêu cầu cURL và lấy kết quả trả về
+$response = curl_exec($curl);
+
+// Kiểm tra nếu có lỗi xảy ra
+if (curl_error($curl)) {
+    echo 'Error: ' . curl_error($curl);
+} else {
+    // Xử lý kết quả trả về
+    $data = json_decode($response, true);
+    $data9 = $data ? $data['data'] : null;
+}
+
+// Đóng cURL session
+curl_close($curl);
+// Tạo các nút phân trang
+
+?>
 <div class="container1">
 
     <!-- left-sidebar -->
@@ -105,7 +141,7 @@
             <ul class='handletoggle'>
                 <?php
                 $token = $_SESSION['token'];
-                $url = 'http://localhost:8000/website_openshare/controllers/users/type/getType.php';
+                $url = getUrlHead() . 'users/type/getType.php';
 
                 // Khởi tạo một cURL session
                 $curl = curl_init();
@@ -180,6 +216,18 @@
             </div>
         <?php
         } ?>
+        <?php if ($keyword == '') : ?>
+        <?php else : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                <?php if ($data9 == null) : ?>
+                    Không tìm thấy đồ dùng nào
+                <?php else : ?>
+                    Tìm thấy được <?= count($data9) ?> đồ dùng
+                <?php endif ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif ?>
         <?php
 
         if ($data1 == null) {
@@ -283,7 +331,7 @@
                         $("#post-image<?php echo $i ?>").imagesGrid({
                             images: <?= json_encode($arr_img) ?>,
                             align: false,
-                            cells: 4,
+                            cells: 2,
                             nextOnClick: true,
                             showViewAll: "more",
                             getViewAllText: function() {},
@@ -304,45 +352,9 @@
         <?php } ?>
         <?php if (isset($_GET['keyword'])) : ?>
             <?php
-
-            $token = $_SESSION['token'];
-            $keyword = isset($_GET['keyword']) ? str_replace(' ', '_', $_GET['keyword']) : '';
-            $url = 'http://localhost:8000/website_openshare/controllers/users/post/search.php?keyword=' . $keyword;
-
-            // Khởi tạo một cURL session
-            $curl = curl_init();
-
-            // Thiết lập các tùy chọn cho cURL session
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_HTTPHEADER => array(
-                    'Content-Type: application/json',
-                    "Accept: application/json",
-                    "Authorization: Bearer {$token}",
-                )
-            ));
-
-            // Thực hiện yêu cầu cURL và lấy kết quả trả về
-            $response = curl_exec($curl);
-
-            // Kiểm tra nếu có lỗi xảy ra
-            if (curl_error($curl)) {
-                echo 'Error: ' . curl_error($curl);
-            } else {
-                // Xử lý kết quả trả về
-                $data = json_decode($response, true);
-                $data9 = $data ? $data['data'] : null;
-            }
-
-            // Đóng cURL session
-            curl_close($curl);
-            // Tạo các nút phân trang
-
-            ?>
-            <?php
             if ($data9 == null) {
-                $total_posts = 1;
+                $total_posts = 0;
+                echo '<a href="./index.php" class="btn btn-warning">Quay lại trang chủ</a>';
             } else {
                 $total_posts = count($data9);
             }
@@ -368,7 +380,7 @@
             <?php
 
             $token = $_SESSION['token'];
-            $url = 'http://localhost:8000/website_openshare/controllers/users/post/get.php';
+            $url = getUrlHead() . 'users/post/get.php';
 
             // Khởi tạo một cURL session
             $curl = curl_init();
@@ -439,7 +451,7 @@
         <?php
 
         $token = $_SESSION['token'];
-        $url = 'http://localhost:8000/website_openshare/controllers/users/post/displaytop10.php';
+        $url = getUrlHead() . 'users/post/displayTop10.php';
 
         // Khởi tạo một cURL session
         $curl = curl_init();
@@ -532,7 +544,6 @@
             this.classList.add('active1');
         });
     }
-    console.log(123);
 </script>
 <style>
     .pagination {

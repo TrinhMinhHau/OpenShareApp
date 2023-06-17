@@ -4,7 +4,7 @@
 <?php
 
 $token = $_SESSION['token_admin'];
-$url = 'http://localhost:8000/website_openshare/controllers/admin/PostManager/displayapprovPost.php';
+$url = getUrlHead() . 'admin/PostManager/displayapprovPost.php';
 
 // Khởi tạo một cURL session
 $curl = curl_init();
@@ -126,7 +126,6 @@ curl_close($curl);
                                                                                 <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
                                                                                     <div class="mr-2 mb-3 mb-lg-0">
                                                                                         <?php
-                                                                                        // var_dump(json_decode($data1[$i]['photos']));
                                                                                         for ($j = 0; $j < count(json_decode($data1[$i]['photos'])); $j++) {
                                                                                         ?>
 

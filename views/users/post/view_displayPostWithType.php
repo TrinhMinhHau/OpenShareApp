@@ -1,4 +1,5 @@
 <?php include('../layout/header.php'); ?>
+
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <!-- CSS của Images Grid -->
@@ -13,7 +14,7 @@
         $token = $_SESSION['token'];
         $idType = $_GET['idType'];
         $keyword = isset($_GET['keyword']) ? str_replace(' ', '_', $_GET['keyword']) : '';
-        $url = 'http://localhost:8000/website_openshare/controllers/users/post/search_pageType.php?keyword=' . $keyword . '&idType=' . $idType;
+        $url = getUrlHead() . 'users/post/search_pageType.php?keyword=' . $keyword . '&idType=' . $idType;
 
         // Khởi tạo một cURL session
         $curl = curl_init();
@@ -54,7 +55,7 @@
             'idType' => $idType
         );
         $json_data = json_encode($data);
-        $url = 'http://localhost:8000/website_openshare/controllers/users/post/getPostWithType.php';
+        $url = getUrlHead() . 'users/post/getPostWithType.php';
 
         // Khởi tạo một cURL session
         $curl = curl_init();
@@ -232,7 +233,7 @@
                         $("#post-image<?php echo $i ?>").imagesGrid({
                             images: <?= json_encode($arr_img) ?>,
                             align: false,
-                            cells: 4,
+                            cells: 2,
                             nextOnClick: true,
                             showViewAll: "more",
                             getViewAllText: function() {},

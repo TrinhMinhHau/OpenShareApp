@@ -4,7 +4,7 @@
 <?php
 
 $token = $_SESSION['token_admin'];
-$url = 'http://localhost:8000/website_openshare/controllers/admin/ItemType/displayItem.php';
+$url = getUrlHead() . 'admin/ItemType/displayItem.php';
 
 // Khởi tạo một cURL session
 $curl = curl_init();
@@ -197,7 +197,7 @@ curl_close($curl);
 
             <!-- ENDUPDATE -->
             <!-- DELETE  -->
-            <?php if ($data1[$i]['idType'] === 8) : ?>
+            <?php if ($data1[$i]['idType'] == 8) : ?>
             <?php else : ?>
                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#ModalDelete<?php echo ($data1[$i]['idType']) ?>">
                     <i class="bi bi-trash-fill"></i> Xóa

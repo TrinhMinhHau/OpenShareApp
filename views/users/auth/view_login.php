@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +35,7 @@
         $userName = $_POST['userName'];
         $password = $_POST['password'];
 
-        $url = 'http://localhost:8000/website_openshare/controllers/users/auth/login.php';
+        $url = getUrlHead() . 'users/auth/login.php';
         $data = array(
             'userName' => $userName,
             'password' => $password,
@@ -67,7 +69,7 @@
         } else {
             if ($result["success"] == 1) {
                 $_SESSION['token'] = $result["token"];
-                header('location:../Trangchu/index.php');
+                header('location:../TrangChu/index.php');
             }
         }
     }
@@ -121,38 +123,11 @@
 
     }
 
-    /* #password {
-        position: relative;
-    } */
-
-    /* #togglePassword {
-        position: relative;
-        top: -49px;
-        right: -150px;
-        display: none;
-    } */
-
     #togglePassword {
         position: relative;
         display: block;
         top: -49px;
         right: -150px;
         display: none;
-    }
-</style>
-<style>
-    .nav-right li {
-        list-style: none;
-        padding: 10px;
-    }
-
-    .nav-right li a {
-        text-decoration: none;
-        color: #333;
-    }
-
-    .nav-right li a:hover {
-        text-decoration: underline;
-        color: #333;
     }
 </style>

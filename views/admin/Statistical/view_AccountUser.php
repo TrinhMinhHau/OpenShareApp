@@ -5,7 +5,7 @@
 <?php
 
 $token = $_SESSION['token_admin'];
-$url = 'http://localhost:8000/website_openshare/controllers/admin/Statistical/AccountUser.php';
+$url = getUrlHead() . 'admin/Statistical/AccountUser.php';
 
 // Khởi tạo một cURL session
 $curl = curl_init();
@@ -32,7 +32,7 @@ if (curl_error($curl)) {
     $data = json_decode($response, true);
     $data1 = (isset($data['data'])) ? $data['data'] : null;
 }
-// var_dump($data1);
+
 
 // Đóng cURL session
 curl_close($curl);

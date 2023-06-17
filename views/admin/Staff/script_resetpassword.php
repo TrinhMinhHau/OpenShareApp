@@ -1,3 +1,4 @@
+<?php include('../../../configs/url_api.php'); ?>
 <?php
 if (isset($_GET['confirmotp'])) {
     $tendangnhap = $_GET['userName_u'];
@@ -14,7 +15,7 @@ if (isset($_GET['confirmotp'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/admin/staff/resetpassword.php';
+    $url = getUrlHead() . 'admin/staff/resetpassword.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);

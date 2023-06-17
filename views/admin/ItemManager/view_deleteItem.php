@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php'); ?>
+
 <?php
 session_start();
 $token = $_SESSION['token_admin'];
@@ -19,7 +21,7 @@ if (isset($_POST['deleteItem'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/admin/ItemType/deleteItem.php';
+    $url = getUrlHead() . 'admin/ItemType/deleteItem.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);
@@ -42,7 +44,6 @@ if (isset($_POST['deleteItem'])) {
         echo 'Có lỗi xảy ra khi gửi yêu cầu PUT đến API';
     } else {
         $response = json_decode($result, true);
-        var_dump($response);
         if ($response[1] === 'TypeItem is Deleted') {
             $_SESSION['status_delete'] = "Xóa loại đồ dùng này thành công";
             header('location: ./view_displayItem.php');

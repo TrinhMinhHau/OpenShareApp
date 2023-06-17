@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php'); ?>
+
 <?php
 session_start();
 $token = $_SESSION['token_admin'];
@@ -14,7 +16,7 @@ if (isset($_POST['addItem'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/admin/ItemType/addItem.php';
+    $url = getUrlHead() . 'admin/ItemType/addItem.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);

@@ -76,7 +76,7 @@ else :
 
                         $jwt = new JwtHandler();
                         $token = $jwt->jwtEncodeData(
-                            'http://localhost:8000/Website_OpenShare/',
+                            'https://shares.tinhoc123.edu.vn/',
                             array("user_id" => $row['idStaff'])
                         );
 

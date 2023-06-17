@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +34,7 @@
         $name = $_POST['name'];
         $password = $_POST['password'];
         $userName = $_POST['userName'];
-        $url = 'http://localhost:8000/website_openshare/controllers/users/auth/register.php';
+        $url = getUrlHead() . 'users/auth/register.php';
         $data = array(
             'name' => $name,
             'password' => $password,
@@ -110,38 +112,11 @@
 
     }
 
-    /* #password {
-        position: relative;
-    }
-
-    #togglePassword {
-        position: absolute;
-        top: 310px;
-        right: 150px;
-        display: none;
-    } */
-
     #togglePassword {
         position: relative;
         display: block;
         top: -49px;
         right: -150px;
         display: none;
-    }
-</style>
-<style>
-    .nav-right li {
-        list-style: none;
-        padding: 10px;
-    }
-
-    .nav-right li a {
-        text-decoration: none;
-        color: #333;
-    }
-
-    .nav-right li a:hover {
-        text-decoration: underline;
-        color: #333;
     }
 </style>

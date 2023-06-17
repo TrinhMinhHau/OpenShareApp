@@ -13,6 +13,7 @@ class db
             $this->conn = new PDO("mysql:host=" . $this->servername . ";dbname=" . $this->db_name . "", $this->username, $this->password);
             // set the PDO error mode to exception
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn->exec("set names utf8mb4");
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }

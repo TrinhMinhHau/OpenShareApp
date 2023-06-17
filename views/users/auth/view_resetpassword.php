@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +41,7 @@ if (isset($_GET['resetpassword'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/users/auth/sendOtp.php';
+    $url = getUrlHead() . 'users/auth/sendOtp.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);
@@ -114,22 +116,6 @@ if (isset($_GET['resetpassword'])) {
 <script>
     document.getElementById('err_dl').innerHTML = document.getElementById('err_ms').value;
 </script>
-<style>
-    .nav-right li {
-        list-style: none;
-        padding: 10px;
-    }
-
-    .nav-right li a {
-        text-decoration: none;
-        color: #333;
-    }
-
-    .nav-right li a:hover {
-        text-decoration: underline;
-        color: #333;
-    }
-</style>
 <style>
     #err_dl {
         color: red;

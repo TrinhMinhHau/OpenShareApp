@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <?php
 session_start();
 $token = $_SESSION['token'];
@@ -18,7 +20,7 @@ if (isset($_POST['Tuchoi'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/users/post/failDetail.php';
+    $url = getUrlHead() . 'users/post/failDetail.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);

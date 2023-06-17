@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <?php
 session_start();
 $token = $_SESSION['token'];
@@ -15,7 +17,7 @@ if (isset($_POST['refuseRequest'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/users/post/refuseRequest.php';
+    $url = getUrlHead() . 'users/post/refuseRequest.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);

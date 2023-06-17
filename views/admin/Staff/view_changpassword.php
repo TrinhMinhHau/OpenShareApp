@@ -1,4 +1,5 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+<?php include('../../../configs/url_api.php'); ?>
 <?php
 session_start();
 $token = $_SESSION['token_admin'];
@@ -20,7 +21,7 @@ $data = array(
 $json_data = json_encode($data);
 
 // URL của API
-$url = 'http://localhost:8000/website_openshare/controllers/admin/Staff/changpassword.php';
+$url = getUrlHead() . 'admin/Staff/changpassword.php';
 
 // Khởi tạo một session cURL
 $curl = curl_init($url);

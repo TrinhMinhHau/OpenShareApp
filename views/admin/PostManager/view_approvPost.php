@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php'); ?>
+
 <?php
 session_start();
 $token = $_SESSION['token_admin'];
@@ -6,14 +8,6 @@ if (isset($_POST['Duyet'])) {
     $idStaff = ($_POST['idStaff']);
     $idUser = ($_POST['idUser']);
     $title = ($_POST['title']);
-
-    echo ($idPost);
-    echo ($idStaff);
-    echo ($title);
-
-    var_dump($idPost);
-    var_dump($idStaff);
-
     // Dữ liệu của câu hỏi cần cập nhật
     $data = array(
         'idPost' => $idPost,
@@ -26,7 +20,7 @@ if (isset($_POST['Duyet'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/admin/PostManager/approvPost.php';
+    $url = getUrlHead() . 'admin/PostManager/approvPost.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);

@@ -1,3 +1,4 @@
+<?php include('../../../configs/url_api.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +26,7 @@
     } else {
         header('location: ../auth/view_login.php');
     }
-    $url = "http://localhost:8000/website_openshare/controllers/users/profile/getUsers.php";
+    $url = getUrlHead() . "users/profile/getUsers.php";
 
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -61,7 +62,7 @@
                 } else {
                     header('location: ../auth/view_login.php');
                 }
-                $url = "http://localhost:8000/website_openshare/controllers/users/post/getNoticeFromAdmin.php";
+                $url = getUrlHead() . "users/post/getNoticeFromAdmin.php";
 
                 $curl = curl_init($url);
                 curl_setopt($curl, CURLOPT_URL, $url);
@@ -90,7 +91,7 @@
                 } else {
                     header('location: ../auth/view_login.php');
                 }
-                $url = "http://localhost:8000/website_openshare/controllers/users/post/getNoticeGiveandReceive.php";
+                $url = getUrlHead() . "users/post/getNoticeGiveandReceive.php";
 
                 $curl = curl_init($url);
                 curl_setopt($curl, CURLOPT_URL, $url);
@@ -134,10 +135,10 @@
                     if (isset($data_merge[$i]['issen_N']) && $data_merge[$i]['issen_N'] == 0  && ($data_merge[$i]['idUser'] == $result['user']['idUser']) && ($data_merge[$i]['status_accept_reject'] === null)) {
                         $dem++;
                     }
-                    if (isset($data_merge[$i]['issen_N']) && $data_merge[$i]['issen_N'] == 0  && ($data_merge[$i]['idUser'] == $result['user']['idUser']) && ($data_merge[$i]['status_accept_reject'] == 2)) {
+                    if (isset($data_merge[$i]['issen_N']) && $data_merge[$i]['issen_N'] == 0  && ($data_merge[$i]['idUser'] == $result['user']['idUser']) && ($data_merge[$i]['status_accept_reject'] == "2")) {
                         $dem++;
                     }
-                    if (isset($data_merge[$i]['issen_N']) && $data_merge[$i]['issen_N'] == 0  && ($data_merge[$i]['idUser'] == $result['user']['idUser']) && ($data_merge[$i]['status_accept_reject'] == 3)) {
+                    if (isset($data_merge[$i]['issen_N']) && $data_merge[$i]['issen_N'] == 0  && ($data_merge[$i]['idUser'] == $result['user']['idUser']) && ($data_merge[$i]['status_accept_reject'] == "3")) {
                         $dem++;
                     }
                 }
@@ -156,16 +157,20 @@
                     {
 
                         $thoigianhienthi = 0;
-                        $thoigian = round((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600, 0) + 5;
-                        if ($thoigian <= 24) {
-                            $thoigianhienthi = $thoigian;
+                        $thoigian = ((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600) + 5;
+                        if ($thoigian <= 1) {
+                            $thoigianhienthi = round($thoigian * 60, 0);
+                        } else if ($thoigian <= 24) {
+                            $thoigianhienthi = round($thoigian);
                         } else if ($thoigian > 24 && $thoigian <= 168) {
                             $thoigianhienthi = round($thoigian / 24);
                         } else {
                             $thoigianhienthi = $datecreate;
                         }
                         $text = '';
-                        if ($thoigian <= 24) {
+                        if ($thoigian <= 1) {
+                            $text = ' phút trước';
+                        } else if ($thoigian > 1 && $thoigian <= 24) {
                             $text = ' giờ trước';
                         } else if ($thoigian > 24 && $thoigian <= 168) {
                             $text = ' ngày trước';
@@ -182,7 +187,7 @@
                                 <?php if ($data_merge[$i]['isSeen'] == 1) : ?>
                                     <div class="setting-notice isSeen">
                                         <img src="../assests/images/notice-icon-b.png" class="settings-icon" alt="" />
-                                        <a href="../post/view_displayPostWithidPost.php?idPost=<?= $data_merge[$i]['post_id'] ?>">
+                                        <a href="../post/view_displayPostwithIdpost.php?idPost=<?= $data_merge[$i]['post_id'] ?>">
                                             <h4><?= $data_merge[$i]['titlePost'] ?></h4>
                                             <p><?= $data_merge[$i]['messagefromAdmin'] ?></p>
                                             <p><?php convert_time($data_merge[$i]['created_at']) ?></p>
@@ -191,7 +196,7 @@
                                 <?php else : ?>
                                     <div class="setting-notice">
                                         <img src="../assests/images/notice-icon-b.png" class="settings-icon" alt="" />
-                                        <a href="../post/view_displayPostWithidPost.php?idPost=<?= $data_merge[$i]['post_id'] ?>">
+                                        <a href="../post/view_displayPostwithIdpost.php?idPost=<?= $data_merge[$i]['post_id'] ?>">
                                             <h4><?= $data_merge[$i]['titlePost'] ?></h4>
                                             <p><?= $data_merge[$i]['messagefromAdmin'] ?></p>
                                             <p><?php convert_time($data_merge[$i]['created_at']) ?></p>
@@ -219,7 +224,7 @@
                                     </div>
                                 <?php endif ?>
                             <?php endif ?>
-                            <?php if (isset($data_merge[$i]['idUserRequest_N']) && $data_merge[$i]['idUserRequest_N'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === 1) : ?>
+                            <?php if (isset($data_merge[$i]['idUserRequest_N']) && $data_merge[$i]['idUserRequest_N'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === "1") : ?>
                                 <?php if ($data_merge[$i]['issen_N'] == 1) : ?>
                                     <div class=" setting-notice isSeen">
                                         <img src="../assests/images/icon-thanh-cong.png" class="settings-icon" alt="" />
@@ -238,7 +243,7 @@
                                     </div>
                                 <?php endif ?>
                             <?php endif ?>
-                            <?php if (isset($data_merge[$i]['idUserRequest_N']) && $data_merge[$i]['idUserRequest_N'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === 0) : ?>
+                            <?php if (isset($data_merge[$i]['idUserRequest_N']) && $data_merge[$i]['idUserRequest_N'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === "0") : ?>
                                 <?php if ($data_merge[$i]['issen_N'] == 1) : ?>
                                     <div class="setting-notice isSeen">
                                         <img src="../assests/images/icon_refuse.png" class="settings-icon" alt="" />
@@ -258,7 +263,7 @@
                                 <?php endif ?>
                             <?php endif ?>
                             <!-- Thông báo sau khi giao hàng thành công -->
-                            <?php if (isset($data_merge[$i]['idUser']) && $data_merge[$i]['idUser'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === 2) : ?>
+                            <?php if (isset($data_merge[$i]['idUser']) && $data_merge[$i]['idUser'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === "2") : ?>
                                 <?php if ($data_merge[$i]['issen_N'] == 1) : ?>
                                     <div class="setting-notice isSeen">
                                         <img src="<?= $data_merge[$i]['photoURL'] ?>" class="settings-icon" alt="" />
@@ -278,7 +283,7 @@
                                 <?php endif ?>
                             <?php endif ?>
 
-                            <?php if (isset($data_merge[$i]['idUser']) && $data_merge[$i]['idUser'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === 3) : ?>
+                            <?php if (isset($data_merge[$i]['idUser']) && $data_merge[$i]['idUser'] === $result['user']['idUser'] && $data_merge[$i]['status_accept_reject'] === "3") : ?>
                                 <?php if ($data_merge[$i]['issen_N'] == 1) : ?>
                                     <div class="setting-notice isSeen">
                                         <img src="<?= $data_merge[$i]['photoURL'] ?>" class="settings-icon" alt="" />

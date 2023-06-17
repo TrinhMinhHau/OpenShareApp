@@ -1,4 +1,5 @@
 <?php include('../layout/header.php'); ?>
+
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <!-- CSS của Images Grid -->
@@ -13,7 +14,7 @@ $data = array(
 );
 $json_data = json_encode($data);
 
-$url = 'http://localhost:8000/website_openshare/controllers/users/post/getRequest.php';
+$url = getUrlHead() . 'users/post/getRequest.php';
 
 
 // Khởi tạo một cURL session
@@ -107,7 +108,7 @@ curl_close($curl);
                     );
                     $json_data = json_encode($data);
 
-                    $url = 'http://localhost:8000/website_openshare/controllers/users/post/displaynumberItemGiveSuccess.php';
+                    $url = getUrlHead() . 'users/post/displaynumberItemGiveSuccess.php';
 
 
                     // Khởi tạo một cURL session
@@ -300,7 +301,7 @@ curl_close($curl);
                                                             <textarea class="form-control" id="dateRequest" name="dateRequest" placeholder="Mô tả ..." rows="1" disabled><?php convert_time($data1[$i]['reviewDay']) ?></textarea>
                                                         </div>
                                                     </div>
-                                                    <?php if ($data1[$i]['status'] === 1) : ?>
+                                                    <?php if ($data1[$i]['status'] == 1) : ?>
                                                         <div>
                                                             <label for="dateRequest" class="col-md-4 col-lg-3 col-form-label">Xác nhận hoàn tất</label>
                                                             <div id="reason-form_tc<?php echo $data1[$i]['idPost'] ?>" style="display: none;">
@@ -397,7 +398,7 @@ curl_close($curl);
                         $("#post-image<?php echo $i ?>").imagesGrid({
                             images: <?= json_encode($arr_img) ?>,
                             align: false,
-                            cells: 4,
+                            cells: 2,
                             nextOnClick: true,
                             showViewAll: "more",
                             getViewAllText: function() {},

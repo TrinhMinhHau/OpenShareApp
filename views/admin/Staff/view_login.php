@@ -9,6 +9,7 @@
     <meta content="" name="keywords">
     <!-- Favicons -->
     <?php include('../../../file.php') ?>
+    <?php include('../../../configs/url_api.php'); ?>
 
 </head>
 
@@ -21,7 +22,7 @@
         $userName = $_POST['userName'];
         $password = $_POST['password'];
 
-        $url = 'http://localhost:8000/website_openshare/controllers/admin/Staff/login.php';
+        $url = getUrlHead() . 'admin/Staff/login.php';
         $data = array(
             'userName' => $userName,
             'password' => $password,
@@ -55,7 +56,7 @@
         } else {
             if ($result["success"] == 1) {
                 $_SESSION['token_admin'] = $result["token"];
-                header('location:http://localhost:8000/website_openshare/Views/Admin/Trangchu/Trangchu.php');
+                header('location:../Trangchu/Trangchu.php');
             }
         }
     }
@@ -70,7 +71,7 @@
 
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                                    <img src="http://localhost:8000/website_openshare/Views/users/assests/images/openshare_logo.png" alt="" width="200px" max-height="65px">
+                                    <img src=" ../../users/assests/images/openshare_logo.png" alt="" width="200px" max-height="65px">
                                 </a>
                             </div><!-- End Logo -->
 

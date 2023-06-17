@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <?php
 session_start();
 $token = $_SESSION['token'];
@@ -13,7 +15,7 @@ if (isset($_POST['deleteAddress'])) {
     // Chuyển dữ liệu sang định dạng JSON
     $json_data = json_encode($data);
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/users/address/delete.php';
+    $url = getUrlHead() . 'users/address/delete.php';
     // Khởi tạo một session cURL
     $curl = curl_init($url);
     // Cấu hình các tùy chọn cho session cURL

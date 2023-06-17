@@ -1,6 +1,5 @@
 <?php include('../layout/header.php'); ?>
 <script src="//code.jquery.com/jquery.min.js"></script>
-
 <!-- CSS của Images Grid -->
 <script src="https://cdn.jsdelivr.net/gh/taras-d/images-grid/src/images-grid.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/taras-d/images-grid/src/images-grid.min.css" />
@@ -15,7 +14,7 @@
         'idPost' => $idPost
     );
     $json_data = json_encode($data);
-    $url = 'http://localhost:8000/website_openshare/controllers/users/post/getPostWithidPost.php';
+    $url = getUrlHead() . 'users/post/getPostWithidPost.php';
 
     // Khởi tạo một cURL session
     $curl = curl_init();
@@ -111,7 +110,7 @@
                     $("#post-image").imagesGrid({
                         images: <?= json_encode($arr_img) ?>,
                         align: false,
-                        cells: 4,
+                        cells: 2,
                         nextOnClick: true,
                         showViewAll: "more",
                         getViewAllText: function() {},

@@ -4,6 +4,8 @@ if (isset($_SESSION['token'])) {
     unset($_SESSION['token']);
 }
 ?>
+<?php include('./configs/url_api.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +55,7 @@ if (isset($_SESSION['token'])) {
         $keyword = isset($_GET['keyword']) ? str_replace(' ', '_', $_GET['keyword']) : '';
 
 
-        $url = 'http://localhost:8000/website_openshare/controllers/users/post/search_page.php?keyword=' . $keyword . '&offset=' . $offset . '&limit=' . $limit;
+        $url = getUrlHead() . 'users/post/search_page.php?keyword=' . $keyword . '&offset=' . $offset . '&limit=' . $limit;
 
         // Khởi tạo một cURL session
         $curl = curl_init();
@@ -86,12 +88,12 @@ if (isset($_SESSION['token'])) {
     <?php else : ?>
         <?php
 
-        $limit = 5; // Số lượng bài viết muốn hiển thị trên mỗi trang
+        $limit = 10; // Số lượng bài viết muốn hiển thị trên mỗi trang
         $page = isset($_GET['page']) ? $_GET['page'] : 1; // Trang hiện tại, mặc định là trang 1
         $offset = ($page - 1) * $limit; // Vị trí bắt đầu của kết quả cần lấy
 
 
-        $url = 'http://localhost:8000/website_openshare/controllers/users/post/getpostapi.php?offset=' . $offset . '&limit=' . $limit;
+        $url = getUrlHead() . 'users/post/getpostapi.php?offset=' . $offset . '&limit=' . $limit;
 
         // Khởi tạo một cURL session
         $curl = curl_init();
@@ -122,6 +124,41 @@ if (isset($_SESSION['token'])) {
         curl_close($curl);
         ?>
     <?php endif; ?>
+    <?php
+
+    $keyword = isset($_GET['keyword']) ? str_replace(' ', '_', ($_GET['keyword'])) : '';
+    $url = getUrlHead() . 'users/post/search.php?keyword=' . $keyword;
+
+    // Khởi tạo một cURL session
+    $curl = curl_init();
+
+    // Thiết lập các tùy chọn cho cURL session
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            "Accept: application/json",
+        )
+    ));
+
+    // Thực hiện yêu cầu cURL và lấy kết quả trả về
+    $response = curl_exec($curl);
+
+    // Kiểm tra nếu có lỗi xảy ra
+    if (curl_error($curl)) {
+        echo 'Error: ' . curl_error($curl);
+    } else {
+        // Xử lý kết quả trả về
+        $data = json_decode($response, true);
+        $data9 = $data ? $data['data'] : null;
+    }
+
+    // Đóng cURL session
+    curl_close($curl);
+    // Tạo các nút phân trang
+
+    ?>
     <div class="container1">
 
         <!-- left-sidebar -->
@@ -131,7 +168,7 @@ if (isset($_SESSION['token'])) {
 
                 <ul class='handletoggle'>
                     <?php
-                    $url = 'http://localhost:8000/website_openshare/controllers/users/type/getType.php';
+                    $url = getUrlHead() . 'users/type/getType.php';
 
                     // Khởi tạo một cURL session
                     $curl = curl_init();
@@ -172,6 +209,7 @@ if (isset($_SESSION['token'])) {
         </div>
         <!-- main-content -->
         <div class="main-content">
+
             <div class="write-post-container" style="display: flex; justify-content: center; align-items: center;">
 
                 <div class="post-row">
@@ -206,22 +244,38 @@ if (isset($_SESSION['token'])) {
                 </div>
             <?php
             } ?>
+            <?php if ($keyword == '') : ?>
+            <?php else : ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
 
+                    <?php if ($data9 == null) : ?>
+                        Không tìm thấy đồ dùng nào
+                    <?php else : ?>
+                        Tìm thấy được <?= count($data9) ?> đồ dùng
+                    <?php endif ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif ?>
             <?php
+
             function convert_time($datecreate)
             {
 
                 $thoigianhienthi = 0;
-                $thoigian = round((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600, 0) + 5;
-                if ($thoigian <= 24) {
-                    $thoigianhienthi = $thoigian;
+                $thoigian = ((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600) + 5;
+                if ($thoigian <= 1) {
+                    $thoigianhienthi = round($thoigian * 60, 0);
+                } else if ($thoigian <= 24) {
+                    $thoigianhienthi = round($thoigian);
                 } else if ($thoigian > 24 && $thoigian <= 168) {
                     $thoigianhienthi = round($thoigian / 24);
                 } else {
                     $thoigianhienthi = $datecreate;
                 }
                 $text = '';
-                if ($thoigian <= 24) {
+                if ($thoigian <= 1) {
+                    $text = ' phút trước';
+                } else if ($thoigian > 1 && $thoigian <= 24) {
                     $text = ' giờ trước';
                 } else if ($thoigian > 24 && $thoigian <= 168) {
                     $text = ' ngày trước';
@@ -230,6 +284,7 @@ if (isset($_SESSION['token'])) {
                 }
                 echo $thoigianhienthi . $text;
             }
+
 
             if ($data1 == null) {
             } else {
@@ -282,7 +337,7 @@ if (isset($_SESSION['token'])) {
                             $("#post-image<?php echo $i ?>").imagesGrid({
                                 images: <?= json_encode($arr_img) ?>,
                                 align: false,
-                                cells: 4,
+                                cells: 2,
                                 nextOnClick: true,
                                 showViewAll: "more",
                                 getViewAllText: function() {},
@@ -303,43 +358,9 @@ if (isset($_SESSION['token'])) {
             <?php } ?>
             <?php if (isset($_GET['keyword'])) : ?>
                 <?php
-
-                $keyword = isset($_GET['keyword']) ? str_replace(' ', '_', ($_GET['keyword'])) : '';
-                $url = 'http://localhost:8000/website_openshare/controllers/users/post/search.php?keyword=' . $keyword;
-
-                // Khởi tạo một cURL session
-                $curl = curl_init();
-
-                // Thiết lập các tùy chọn cho cURL session
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => $url,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_HTTPHEADER => array(
-                        'Content-Type: application/json',
-                        "Accept: application/json",
-                    )
-                ));
-
-                // Thực hiện yêu cầu cURL và lấy kết quả trả về
-                $response = curl_exec($curl);
-
-                // Kiểm tra nếu có lỗi xảy ra
-                if (curl_error($curl)) {
-                    echo 'Error: ' . curl_error($curl);
-                } else {
-                    // Xử lý kết quả trả về
-                    $data = json_decode($response, true);
-                    $data9 = $data ? $data['data'] : null;
-                }
-
-                // Đóng cURL session
-                curl_close($curl);
-                // Tạo các nút phân trang
-
-                ?>
-                <?php
                 if ($data9 == null) {
-                    $total_posts = 1;
+                    $total_posts = 0;
+                    echo '<a href="./index.php" class="btn btn-warning">Quay lại trang chủ</a>';
                 } else {
                     $total_posts = count($data9);
                 }
@@ -364,7 +385,7 @@ if (isset($_SESSION['token'])) {
             <?php else : ?>
                 <?php
 
-                $url = 'http://localhost:8000/website_openshare/controllers/users/post/get.php';
+                $url = getUrlHead() . 'users/post/get.php';
 
                 // Khởi tạo một cURL session
                 $curl = curl_init();
@@ -433,7 +454,7 @@ if (isset($_SESSION['token'])) {
             </div>
             <?php
 
-            $url = 'http://localhost:8000/website_openshare/controllers/users/post/displaytop10.php';
+            $url = getUrlHead() . 'users/post/displayTop10.php';
 
             // Khởi tạo một cURL session
             $curl = curl_init();
@@ -513,7 +534,6 @@ if (isset($_SESSION['token'])) {
                 this.classList.add('active1');
             });
         }
-        console.log(123);
     </script>
     <style>
         .pagination {
@@ -598,7 +618,7 @@ if (isset($_SESSION['token'])) {
             }
         });
     </script>
-    <style>
+    <!-- <style>
         .nav-right li {
             list-style: none;
             padding: 10px;
@@ -613,7 +633,7 @@ if (isset($_SESSION['token'])) {
             text-decoration: underline;
             color: #333;
         }
-    </style>
+    </style> -->
     <script>
         const toggleEl = document.getElementById('toggle');
         const handletoggleEl = document.querySelector('.handletoggle');

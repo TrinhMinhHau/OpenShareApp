@@ -4,10 +4,10 @@
 $token = $_SESSION['token_admin'];
 
 // Các URL cần render
-$url1 = 'http://localhost:8000/website_openshare/controllers/admin/Statistical/sumofUser.php';
-$url2 = 'http://localhost:8000/website_openshare/controllers/admin/Statistical/sumofPost.php';
-$url3 = 'http://localhost:8000/website_openshare/controllers/admin/Statistical/sumofItemSuccess.php';
-$url4 = 'http://localhost:8000/website_openshare/controllers/admin/Statistical/displayTop10.php';
+$url1 = getUrlHead() . 'admin/Statistical/sumofUser.php';
+$url2 = getUrlHead() . 'admin/Statistical/sumofPost.php';
+$url3 = getUrlHead() . 'admin/Statistical/sumofItemSuccess.php';
+$url4 = getUrlHead() . 'admin/Statistical/displayTop10.php';
 
 // Khởi tạo một multi-cURL session
 $multiCurl = curl_multi_init();

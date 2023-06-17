@@ -4,7 +4,7 @@
 <?php
 
 $token = $_SESSION['token_admin'];
-$url = 'http://localhost:8000/website_openshare/controllers/admin/UserManager/displayUser.php';
+$url = getUrlHead() . 'admin/UserManager/displayUser.php';
 
 // Khởi tạo một cURL session
 $curl = curl_init();
@@ -93,7 +93,7 @@ curl_close($curl);
                                     );
                                     $json_data = json_encode($data);
 
-                                    $url = 'http://localhost:8000/website_openshare/controllers/admin/Staff/getNumberPoin.php';
+                                    $url = getUrlHead() . 'admin/Staff/getNumberPoin.php';
 
 
                                     // Khởi tạo một cURL session

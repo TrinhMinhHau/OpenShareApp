@@ -13,7 +13,7 @@ $data = array(
 );
 $json_data = json_encode($data);
 
-$url = 'http://localhost:8000/website_openshare/controllers/users/post/displayPostbyidUser.php';
+$url = getUrlHead() . 'users/post/displayPostbyidUser.php';
 
 
 // Khởi tạo một cURL session
@@ -55,7 +55,7 @@ $data = array(
 );
 $json_data = json_encode($data);
 
-$url = 'http://localhost:8000/website_openshare/controllers/users/profile/getInforUserByID.php';
+$url = getUrlHead() . 'users/profile/getInforUserByID.php';
 
 
 // Khởi tạo một cURL session
@@ -113,7 +113,7 @@ curl_close($curl);
                     );
                     $json_data = json_encode($data);
 
-                    $url = 'http://localhost:8000/website_openshare/controllers/users/post/displaynumberItemGiveSuccess.php';
+                    $url = getUrlHead() . 'users/post/displaynumberItemGiveSuccess.php';
 
 
                     // Khởi tạo một cURL session
@@ -189,7 +189,7 @@ curl_close($curl);
                     );
                     $json_data = json_encode($data);
 
-                    $url = 'http://localhost:8000/website_openshare/controllers/users/address/get.php';
+                    $url = getUrlHead() . 'users/address/get.php';
 
 
                     // Khởi tạo một cURL session
@@ -370,7 +370,7 @@ curl_close($curl);
                             $("#post-image<?php echo $i ?>").imagesGrid({
                                 images: <?= json_encode($arr_img) ?>,
                                 align: false,
-                                cells: 4,
+                                cells: 2,
                                 nextOnClick: true,
                                 showViewAll: "more",
                                 getViewAllText: function() {},

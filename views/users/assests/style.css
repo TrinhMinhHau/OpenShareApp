@@ -43,6 +43,20 @@ nav {
   font-size: 10px;
   padding: 5px 5px;
 }
+.nav-right li {
+  list-style: none;
+  padding: 10px;
+}
+
+.nav-right li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.nav-right li a:hover {
+  text-decoration: underline;
+  color: #333;
+}
 .logo {
   width: 160px;
   margin-right: 45px;
@@ -147,6 +161,19 @@ a.active1 i {
   border-radius: 4px;
   color: #626262;
 }
+.right-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.right-sidebar::-webkit-scrollbar-track {
+  background-color: #e5dfdf;
+}
+
+.right-sidebar::-webkit-scrollbar-thumb {
+  background: #8c8790;
+  border-radius: 50px;
+}
+
 .left-sidebar,
 .right-sidebar {
   overflow: hidden;
@@ -632,7 +659,7 @@ a.active1 i {
   font-size: 20px;
   position: fixed;
   bottom: 86px;
-  right: 100px;
+  right: 30px;
   z-index: 10000;
   cursor: pointer;
 }
@@ -898,9 +925,9 @@ a.active1 i {
 }
 /*CSS displaySendRequest */
 .displayRequest {
-  margin-left: 15%;
+  margin-left: 30%;
   margin-top: 15px;
-  width: 70%;
+  width: 50%;
 }
 .page {
   width: 70%;
@@ -947,9 +974,9 @@ a.active1 i {
   .settings-notice {
     width: 50%;
   }
-  .post i {
+  /* .post i {
     display: none;
-  }
+  } */
   .Menu {
     display: none;
   }
@@ -1184,4 +1211,54 @@ a.active1 i {
 .settings-notice::-webkit-scrollbar-thumb {
   background: #8c8790;
   border-radius: 50px;
+}
+.Menu {
+  margin-top: 24px;
+}
+
+.Menu a {
+  margin-left: 10px;
+  padding: 10px 15px;
+  background: #fff;
+  color: #333;
+  transition: 1s;
+  max-width: 100%;
+  border-radius: 3px;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.Menu a.active2 {
+  margin-left: 10px;
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.Menu a:hover {
+  text-decoration: underline;
+
+  background: #0056b3;
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .write-post-container {
+    width: 100%;
+  }
+  .search-box {
+    width: 100%;
+  }
+  .displayRequest {
+    margin-left: 15%;
+    margin-top: 15px;
+    width: 70%;
+  }
+}
+
+/*Fix co dinh image-grids anh*/
+@media (min-width: 768px) {
+  .imgs-grid .imgs-grid-image .image-wrap img {
+    width: 200px !important;
+    height: 200px !important;
+  }
 }

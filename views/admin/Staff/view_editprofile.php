@@ -1,3 +1,4 @@
+<?php include('../../../configs/url_api.php'); ?>
 <?php
 session_start();
 $token = $_SESSION['token_admin'];
@@ -30,7 +31,7 @@ if (isset($_POST['editprofile'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/admin/Staff/editprofile.php';
+    $url = getUrlHead() . 'admin/Staff/editprofile.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);
@@ -54,10 +55,6 @@ if (isset($_POST['editprofile'])) {
         echo 'Có lỗi xảy ra khi gửi yêu cầu PUT đến API';
     } else {
         $response = json_decode($result, true);
-        // var_dump($response);
-        // if ($response['message'] == 'User image updated successfully') {
-        //     header('location: ./view_quanlytaikhoan.php');
-        // }
         $_SESSION['capnhat'] = 'Cập nhật thành công';
         header('location: ./view_quanlytaikhoan.php');
     }

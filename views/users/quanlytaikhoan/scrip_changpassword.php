@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php');
+?>
 <?php
 session_start();
 $token = $_SESSION['token'];
@@ -18,7 +20,7 @@ if (isset($_POST['submit'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/users/auth/changepassword.php';
+    $url = getUrlHead() . 'users/auth/changepassword.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);
@@ -43,7 +45,7 @@ if (isset($_POST['submit'])) {
         header('location:./view_changepassword.php');
     } else {
         $_SESSION['cpw_suc'] = "Đổi mật khẩu thành công";
-        header('location:../Trangchu/index.php');
+        header('location:../TrangChu/index.php');
     }
     // Đóng session cURL
     curl_close($curl);

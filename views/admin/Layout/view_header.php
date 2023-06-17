@@ -1,3 +1,5 @@
+<?php include('../../../configs/url_api.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +21,7 @@
     } else {
         header('location: ../Staff/view_login.php');
     }
-    $url = "http://localhost:8000/website_openshare/controllers/admin/Staff/getStaff.php";
+    $url = getUrlHead() . "admin/Staff/getStaff.php";
 
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -69,7 +71,7 @@
                 </li><!-- End Search Icon-->
                 <!-- callapi đang đợi duyệt để truyền vào header -->
                 <?php
-                $url = 'http://localhost:8000/website_openshare/controllers/admin/PostManager/displayUnapprovedPost.php';
+                $url = getUrlHead() . 'admin/PostManager/displayUnapprovedPost.php';
 
                 // Khởi tạo một cURL session
                 $curl = curl_init();
@@ -100,24 +102,35 @@
                 curl_close($curl);
                 ?>
                 <?php
+
+
                 function convert_time($datecreate)
                 {
 
                     $thoigianhienthi = 0;
-                    $thoigian = round((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600, 0) + 5;
-                    if ($thoigian <= 24) {
-                        $thoigianhienthi = $thoigian;
-                    } else {
+                    $thoigian = ((strtotime(date('Y-m-d H:i:s')) - strtotime($datecreate)) / 3600) + 5;
+                    if ($thoigian <= 1) {
+                        $thoigianhienthi = round($thoigian * 60, 0);
+                    } else if ($thoigian <= 24) {
+                        $thoigianhienthi = round($thoigian);
+                    } else if ($thoigian > 24 && $thoigian <= 168) {
                         $thoigianhienthi = round($thoigian / 24);
+                    } else {
+                        $thoigianhienthi = $datecreate;
                     }
                     $text = '';
-                    if ($thoigian <= 24) {
+                    if ($thoigian <= 1) {
+                        $text = ' phút trước';
+                    } else if ($thoigian > 1 && $thoigian <= 24) {
                         $text = ' giờ trước';
-                    } else {
+                    } else if ($thoigian > 24 && $thoigian <= 168) {
                         $text = ' ngày trước';
+                    } else {
+                        $text = '';
                     }
-                    echo 'Cách đây ' . $thoigianhienthi . $text;
+                    echo $thoigianhienthi . $text;
                 }
+
                 ?>
                 <!-- end -->
 

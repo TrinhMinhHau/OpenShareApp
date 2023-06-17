@@ -1,6 +1,9 @@
+<?php include('../../../configs/url_api.php');
+?>
 <?php
 session_start();
 $token = $_SESSION['token'];
+
 if (isset($_POST['acceptRequest'])) {
     $id = $_POST['idRequest'];
     $message = $_POST['message'];
@@ -17,7 +20,7 @@ if (isset($_POST['acceptRequest'])) {
     $json_data = json_encode($data);
 
     // URL của API
-    $url = 'http://localhost:8000/website_openshare/controllers/users/post/acceptRequest.php';
+    $url = getUrlHead() . 'users/post/acceptRequest.php';
 
     // Khởi tạo một session cURL
     $curl = curl_init($url);
