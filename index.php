@@ -204,8 +204,12 @@ if (isset($_SESSION['token'])) {
                 </ul>
 
             </div>
-
-
+            <div class="sidebar-title">
+                <h4 class="text-warning">Tải ứng dụng OpenShare</h4>
+            </div>
+            <a href="./views/users/Introduce_App/index.html">
+                <div class="image-container2"></div>
+            </a>
         </div>
         <!-- main-content -->
         <div class="main-content">
@@ -446,11 +450,11 @@ if (isset($_SESSION['token'])) {
         <!-- right-sidebar -->
         <div class="right-sidebar" style="width: 25%;">
             <div class="sidebar-title">
-                <h4 class="text-warning">Quảng cáo</h4>
+                <h4 class="text-warning">Tải ứng dụng OpenShare</h4>
             </div>
-            <img src="./views/users/assests/images/advertisement.png" alt="" srcset="" class="sidebar-ads" />
+            <a href="./views/users/Introduce_App/index.html"><img src="./views/users/assests/images/giphy.gif" alt="" srcset="" class="sidebar-ads" /></a>
             <div class="sidebar-title">
-                <h4 class="text-success">Top nhà hảo tâm</h4>
+                <h4 class="text-warning">Top nhà hảo tâm</h4>
             </div>
             <?php
 

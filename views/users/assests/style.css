@@ -229,6 +229,10 @@ a.active1 i {
   font-weight: 600;
   font-size: 16px;
 }
+.left-sidebar h4 {
+  font-weight: 600;
+  font-size: 16px;
+}
 .sidebar-title a {
   text-decoration: none;
   color: #1876f2;
@@ -272,8 +276,15 @@ a.active1 i {
 }
 .sidebar-ads {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: -60px;
+  margin-top: -70px;
   border-radius: 4px;
+}
+.sidebar-ads1 {
+  width: 80%;
+  margin-top: -20px;
+  /* margin-bottom: 20px;
+  border-radius: 4px; */
 }
 .online-list {
   display: flex;
@@ -866,10 +877,7 @@ a.active1 i {
   }
   .left-sidebar {
     display: none;
-  }
-  /* .search-box {
-    max-width: 70%;
-  } */
+  } /* .search-box { max-width: 70%; } */
 }
 @media (max-width: 900px) {
   /* .search-box {
@@ -1268,4 +1276,14 @@ a.active1 i {
     width: 200px !important;
     height: 200px !important;
   }
+}
+.image-container2 {
+  border-radius: 5px;
+  width: 250px; /* Định nghĩa chiều rộng của khối div */
+  height: 200px; /* Định nghĩa chiều cao của khối div */
+  background-color: #ffa925ab; /* Mã màu nền của khối div */
+  background-image: url("./images/giphy_gioithieu.gif"); /* Đường dẫn tới hình ảnh */
+  background-size: cover; /* Đảm bảo hình ảnh sẽ được phù hợp với kích thước của khối div */
+  background-position: center; /* Căn giữa hình ảnh trong khối div */
+  background-repeat: no-repeat; /* Không lặp lại hình ảnh trong khối div */
 }

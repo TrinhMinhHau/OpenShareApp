@@ -89,7 +89,7 @@ else :
 
                     // IF INVALID PASSWORD
                     else :
-                        $returnData = msg(0, 422, 'Password không đúng!');
+                        $returnData = msg(0, 422, 'Mật khẩu không đúng!');
                     endif;
                 endif;
 

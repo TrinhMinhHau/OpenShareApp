@@ -442,11 +442,11 @@ curl_close($curl);
     <!-- right-sidebar -->
     <div class="right-sidebar">
         <div class="sidebar-title">
-            <h4 class="text-warning">Quảng cáo</h4>
+            <h4 class="text-warning">Tải ứng dụng OpenShare</h4>
         </div>
-        <img src="../assests/images/advertisement.png" alt="" srcset="" class="sidebar-ads" />
+        <a href="../Introduce_App/index.html"> <img src="../assests/images/giphy.gif" alt="" srcset="" class="sidebar-ads" /></a>
         <div class="sidebar-title">
-            <h4 class="text-success">Top nhà hảo tâm</h4>
+            <h4 class="text-warning">Top nhà hảo tâm</h4>
         </div>
         <?php
 

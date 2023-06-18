@@ -52,7 +52,7 @@ else :
     if (strlen($password) < 8) :
         $returnData = msg(0, 422, 'Mật khẩu không được nhỏ hơn 8 ký tự!!!');
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
-        $returnData = msg(0, 422, 'Invalid Email Address!');
+        $returnData = msg(0, 422, 'Địa chỉ email không hợp lệ!');
     elseif (strlen($name) < 3) :
         $returnData = msg(0, 422, 'Tên không được nhỏ hơn 3 ký tự ');
     elseif (strlen($userName) < 6) :

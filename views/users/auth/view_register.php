@@ -85,7 +85,7 @@
                                                                                             else '';  ?>" required oninvalid="this.setCustomValidity('Vui lòng nhập tên đăng nhập !!!')" oninput="setCustomValidity('')" />
                     <input type="text" placeholder="Họ và tên" name="name" value="<?php if (isset($_POST['name'])) echo $_POST['name'];
                                                                                     else '';  ?>" required oninvalid="this.setCustomValidity('Vui lòng nhập họ và tên!!!')" oninput="setCustomValidity('')" />
-                    <input type="text" placeholder="Email" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];
+                    <input type="email" placeholder="Email" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email'];
                                                                                 else '';  ?>" required oninvalid="this.setCustomValidity('Vui lòng nhập email !!!')" oninput="setCustomValidity('')" />
                     <input type="password" placeholder="Mật khẩu" name="password" id="password" value="<?php if (isset($_POST['password'])) echo $_POST['password'];
                                                                                                         else '';  ?>" required oninvalid="this.setCustomValidity('Vui lòng nhập mật khẩu !!!')" oninput="setCustomValidity('')" />
